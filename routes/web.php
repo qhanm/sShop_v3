@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('test', function () {
+    return view('backend.layouts.master');
+});
+
 Route::get('/', function () {
     $users = \App\Models\Accounts\User::query()->first();
     //$users = new \App\Models\Accounts\User();
