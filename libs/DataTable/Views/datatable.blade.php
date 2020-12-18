@@ -38,7 +38,13 @@ $hasFilter = \Illuminate\Support\Arr::where($columnObjects, function ($columnObj
                 @foreach($columnObjects as $columnObject)
                     <td>
                         @if($columnObject->getFilter() == true)
-                            {!! $columnObject->renderFilterInput() !!}
+                            @if(count($columnObject->getDataDropdown()) == 0)
+                                {!! $columnObject->renderFilterInput() !!}
+                            @else
+                                {!! $columnObject->renderFilterDropdown() !!}
+                            @endif
+
+
                         @endif
                     </td>
                 @endforeach

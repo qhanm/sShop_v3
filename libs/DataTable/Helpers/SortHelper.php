@@ -15,11 +15,12 @@ class SortHelper
     public static function getDirection(string $column) : string
     {
         $position = mb_stripos($column, '-');
+
         if($position === 0){
-            return Config::$sortDirectionASC;
+            return Config::$sortDirectionDESC;
         }
 
-        return Config::$sortDirectionDESC;
+        return Config::$sortDirectionASC;
     }
 
     public static function getSortableLink(Request $request, BaseColumn $columnObject)

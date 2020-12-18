@@ -36,7 +36,7 @@ class DataTable
     {
         $this->applyColumns();
 
-        $this->dataProvider->selectionConditions($this->getAttribute(), $this->getColumnSort());
+        $this->dataProvider->selectionConditions($this->getAttribute(), $this->getColumnSort(), []);
 
         $totalCount = $this->dataProvider->getCount();
 
@@ -100,10 +100,7 @@ class DataTable
     {
         $attributes = [];
         Arr::where($this->columnObjects, function ($value, $index) use(&$attributes){
-            if(!empty($value->getSearchAble())){
-                $attributes[] = $value->getSearchAble();
-            }
-            elseif(!empty($value->getAttribute())){
+            if($value->getAttribute() !== null){
                 $attributes[] = $value->getAttribute();
             }
         });

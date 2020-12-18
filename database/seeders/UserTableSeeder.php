@@ -30,6 +30,22 @@ class UserTableSeeder extends Seeder
         $roleAdmin->guard_name = 'web';
         $roleAdmin->save();
 
+
+        $roleE = new Role();
+        $roleE->name = 'employee';
+        $roleE->guard_name = 'web';
+        $roleE->save();
+
+        $roleW = new Role();
+        $roleW->name = 'witter';
+        $roleW->guard_name = 'web';
+        $roleW->save();
+
+        $roleS = new Role();
+        $roleS->name = 'shipper';
+        $roleS->guard_name = 'web';
+        $roleS->save();
+
         $user->assignRole($roleAdmin->id);
 
         $faker = Factory::create();

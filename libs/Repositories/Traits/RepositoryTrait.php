@@ -37,4 +37,6 @@ trait RepositoryTrait
     {
         return \Schema::getColumnListing($table);
     }
+
+
 }

@@ -5,6 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Libs\DataTable\Config;
+use Libs\DataTable\Helpers\SortHelper;
 
 class DataProvider extends AbstractDataProvider
 {
@@ -26,6 +28,8 @@ class DataProvider extends AbstractDataProvider
         $this->query = clone $query;
         $this->request = empty($request) ? new Request() : $request;
         $this->model = $this->query->getModel();
+        $this->page = $this->request->get(Config::$requestPage, Config::$page);
+        $this->perPage = $this->request->get(Config::$requestPerPage, Config::$perPage);
     }
 
     public function get(): Collection
@@ -36,7 +40,12 @@ class DataProvider extends AbstractDataProvider
 
     public function selectionConditions(array $attributes, array $columnSort = [], array $columnFilter = []): void
     {
-
+        if(($column = $this->request->get(Config::$requestSort, null)))
+        {
+            if(in_array(SortHelper::getSortColumn($column), $columnSort)){
+                $this->query->orderBy($this->model->getTable() . '.' . SortHelper::getSortColumn($column), SortHelper::getDirection($column));
+            }
+        }
     }
 
     public function getCount(): int

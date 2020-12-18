@@ -19,7 +19,9 @@ class Config
 
     public static $tableClass = 'table table-striped mb-0';
 
-    public static $inputFilter = 'form-control form-control-sm';
+    public static $inputFilter = 'form-control';
+
+    public static $selectFilter = 'form-control';
 
     public static $sortDirectionASC = 'asc';
 

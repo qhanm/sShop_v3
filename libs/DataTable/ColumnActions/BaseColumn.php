@@ -33,6 +33,9 @@ abstract class BaseColumn
     /** @var $value string | array | \Closure */
     protected $value;
 
+    /** @var $dataDropdown array */
+    protected $dataDropdown = [];
+
     public function __construct(array $config = [])
     {
         $this->loadConfig($config);
@@ -60,6 +63,9 @@ abstract class BaseColumn
         return $this->attribute;
     }
 
+    public function getDataDropdown(){
+        return $this->dataDropdown;
+    }
 
     public function render($row){
         return $this->getValue($row);
@@ -74,6 +80,10 @@ abstract class BaseColumn
 
     public function renderFilterDropdown()
     {
-
+        return view('Filter.dropdown', [
+            'attribute' => $this->attribute,
+            'data' => $this->dataDropdown['data'],
+            'mapKey' => $this->dataDropdown['mapKey'],
+        ]);
     }
 }
