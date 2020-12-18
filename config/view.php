@@ -15,6 +15,8 @@ return [
 
     'paths' => [
         resource_path('views'),
+        realpath(base_path('libs/FormBuilder/Views')), // using for form builder
+        realpath(base_path('libs/DataTable/Views')), // using for datatable
     ],
 
     /*

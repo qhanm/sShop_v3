@@ -6,6 +6,7 @@ use App\Models\Accounts\Permission;
 use App\Models\Accounts\PermissionRole;
 use App\Models\Accounts\Role;
 use App\Models\Accounts\User;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -28,6 +29,18 @@ class UserTableSeeder extends Seeder
         $roleAdmin->name = 'superadmin';
         $roleAdmin->guard_name = 'web';
         $roleAdmin->save();
+
+        $user->assignRole($roleAdmin->id);
+
+        $faker = Factory::create();
+
+        for($i = 0; $i < 199; $i++){
+            $user = new User();
+            $user->name = $faker->name;
+            $user->email = $faker->unique()->email;
+            $user->password = Hash::make('123456');
+            $user->save();
+        }
 
         $listPermission = [
             ['name' => 'get.user', 'guard_name' => 'web'],

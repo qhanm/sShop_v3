@@ -19,11 +19,21 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasRole;
 
     protected $table = 'user';
+    protected $appends = ['roles'];
+
 
     protected $fillable = [
         'name',
         'email',
         'password',
+    ];
+
+    protected $visible = [
+        'id',
+        'name',
+        'email',
+        'password',
+        'roles',
     ];
 
     protected $hidden = [
@@ -34,4 +44,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getRolesAttribute()
+    {
+        return optional($this->roles());
+    }
+
 }

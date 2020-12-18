@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('test', function () {
-    return view('backend.layouts.master');
+    return view('backend.auth.login');
 });
 
 Route::get('/', function () {
@@ -22,4 +22,9 @@ Route::get('/', function () {
     //$users = new \App\Models\Accounts\User();
     dd($users->hasPermission('get.user1'));
     return view('welcome');
+});
+
+Route::get('/clear-cache', function() {
+    $exitCode = \Illuminate\Support\Facades\Artisan::call('cache:clear');
+    // return what you want
 });
